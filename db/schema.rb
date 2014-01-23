@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140122180551) do
   create_table "outcomes", force: true do |t|
     t.string   "name"
     t.integer  "event_id"
+    t.integer  "shares_outstanding"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
