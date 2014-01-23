@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140122180551) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "events", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -27,6 +30,6 @@ ActiveRecord::Schema.define(version: 20140122180551) do
     t.datetime "updated_at"
   end
 
-  add_index "outcomes", ["event_id"], name: "index_outcomes_on_event_id"
+  add_index "outcomes", ["event_id"], name: "index_outcomes_on_event_id", using: :btree
 
 end
