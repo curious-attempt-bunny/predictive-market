@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
   has_many :holdings
 
   def purchase(outcome, quantity)
-    # TODO deduct from the balance, etc.
-    holdings.create!(outcome: outcome, quantity: quantity)
+    self.balance -= outcome.transaction_cost(quantity)
+    save!
+    holding = holdings.where(outcome: outcome).first || holdings.build(outcome: outcome, quantity: 0)
+    holding.quantity += quantity
+    holding.save!
   end
 end
