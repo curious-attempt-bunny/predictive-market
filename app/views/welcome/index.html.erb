@@ -1,3 +1,23 @@
 <div>
   <h1>Welcome to the Prophetron!</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Outcome</th>
+        <th>Price</th>
+        <th>Quantity Held</th>
+        <th>Valuation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @outcomes.each do |outcome| %>
+      <tr>
+        <td><%= outcome.name %></td>
+        <td><%= outcome.share_price %></td>
+        <td>TODO</td>
+        <td>TODO</td>
+      </tr>
+      <%- end %>
+    </tbody>
+  </table>
 </div>
