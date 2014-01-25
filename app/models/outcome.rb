@@ -14,7 +14,8 @@ class Outcome < ActiveRecord::Base
    numerator = Math::E ** (shares_outstanding / ARTIFICIAL_LIQUIDITY)
    denominator = event.outcome_terms.inject(:+)
 
-   numerator / denominator
+   # We're multiplying by 100 because we don't have cents in our currency
+   100 * numerator / denominator
   end
 
   def transaction_cost(num_shares)
@@ -32,7 +33,8 @@ class Outcome < ActiveRecord::Base
   private
 
   def cost_function(deltas = {})
-    ARTIFICIAL_LIQUIDITY * Math.log(event.outcome_terms(deltas).inject(:+))
+    # We're multiplying by 100 because we don't have cents in our currency
+    100 * ARTIFICIAL_LIQUIDITY * Math.log(event.outcome_terms(deltas).inject(:+))
   end
 
 end
