@@ -25,11 +25,9 @@ describe Outcome do
 
     context 'after some transactions' do
       before do
-        outcome1.shares_outstanding = 50
-        outcome2.shares_outstanding = 10
-        outcome1.save
-        outcome2.save
-        outcome1.reload
+        user = User.create!(email: 'foo@someplace.com', password: 'barbazqub')
+        user.purchase(outcome1, 50)
+        user.purchase(outcome2, 10)
       end
 
       it 'still returns the correct cost' do

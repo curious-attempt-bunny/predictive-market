@@ -6,6 +6,7 @@ class Outcome < ActiveRecord::Base
   ARTIFICIAL_LIQUIDITY = 100.0
 
   belongs_to :event
+  has_many :holdings
 
   before_create { |outcome| outcome.shares_outstanding = 0 }
 
@@ -18,6 +19,10 @@ class Outcome < ActiveRecord::Base
 
   def transaction_cost(num_shares)
     cost_function( self => num_shares ) - cost_function
+  end
+
+  def shares_outstanding
+    holdings.sum(:quantity)
   end
 
   private
