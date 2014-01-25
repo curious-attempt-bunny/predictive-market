@@ -2,7 +2,8 @@ require 'spec_helper'
 
 describe User do
   describe "#purchase" do
-    let(:subject) { User.create!(balance: 100, email: 'foo@bar.com', password: '12345678') }
+    let(:balance) { 100 }
+    let(:subject) { User.create!(balance: balance, email: 'foo@bar.com', password: '12345678') }
     let(:outcome) { Outcome.create!(event_id: 1) }
 
     before do
@@ -41,8 +42,14 @@ describe User do
       end
     end
 
-    pending "should not exceed budget" do
+    describe "limited balance" do
+      let(:balance) { 10 }
 
+      it "should not go negative" do
+        expect {
+          subject.purchase(outcome, 10)
+        }.to raise_error(User::InsufficientBalanceError)
+      end
     end
   end
 end
