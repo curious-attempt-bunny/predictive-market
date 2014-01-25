@@ -19,8 +19,10 @@
         <td><%= outcome.name %></td>
         <td><%= '%.2f' % outcome.share_price %></td>
         <%- if current_user %>
-        <td><%= '%.2f' % current_user.quantity(outcome) %></td>
+        <td><%= current_user.quantity(outcome) %></td>
         <td><%= '%.2f' % current_user.valuation(outcome) %></td>
+        <td><%= link_to("Buy",  purchase_outcome_path(outcome, quantity: 1),   method: :post) %></td>
+        <td><%= link_to("Sell", purchase_outcome_path(outcome, quantity: -1),  method: :post) if current_user.quantity(outcome) > 0 %></td>
         <%- end -%>
       </tr>
       <%- end %>
