@@ -3,19 +3,25 @@
   <table>
     <thead>
       <tr>
+        <th>Event</th>
         <th>Outcome</th>
         <th>Price</th>
-        <th>Quantity Held</th>
+        <%- if current_user %>
+        <th>Held</th>
         <th>Valuation</th>
+        <%- end -%>
       </tr>
     </thead>
     <tbody>
       <%- @outcomes.each do |outcome| %>
       <tr>
+        <td><%= outcome.event.name %></td>
         <td><%= outcome.name %></td>
-        <td><%= outcome.share_price %></td>
+        <td><%= '%.2f' % outcome.share_price %></td>
+        <%- if current_user %>
         <td>TODO</td>
         <td>TODO</td>
+        <%- end -%>
       </tr>
       <%- end %>
     </tbody>
