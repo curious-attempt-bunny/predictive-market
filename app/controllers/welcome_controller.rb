@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  def hello
-    render :inline => "Welcome to the Prophetron!"
+  def index
+    render
   end
 end
