@@ -30,6 +30,9 @@ gem 'jquery-turbolinks' # Ensure that jquery domready gets fired on after a turb
 gem 'font-awesome-sass' # Icons for Bootstrap
 gem 'bootstrap-sass-rails' # Bootstrap
 
+# gem 'simple_form' # Simple form to make forms easier, but doesn't support Bootstrap 3 yet
+gem 'simple_form', github: 'zlx/simple_form_bootstrap3' # Bootstrap 3 compatible forms
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
