@@ -40,7 +40,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? -%>
-              <li><%= current_user.email %></li>
+              <li><%= link_to current_user.email, edit_user_registration_path %></li>
               <li><%= link_to 'My info', edit_user_registration_path %></li>
               <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
             <% else %>
