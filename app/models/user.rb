@@ -17,4 +17,13 @@ class User < ActiveRecord::Base
     holding.quantity += quantity
     holding.save!
   end
+
+  def quantity(outcome)
+    holdings.where(outcome: outcome).sum(:quantity)
+  end
+
+  def valuation(outcome)
+    return 0 if quantity(outcome) == 0
+    -outcome.transaction_cost(-quantity(outcome))
+  end
 end

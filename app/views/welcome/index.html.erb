@@ -19,8 +19,8 @@
         <td><%= outcome.name %></td>
         <td><%= '%.2f' % outcome.share_price %></td>
         <%- if current_user %>
-        <td>TODO</td>
-        <td>TODO</td>
+        <td><%= '%.2f' % current_user.quantity(outcome) %></td>
+        <td><%= '%.2f' % current_user.valuation(outcome) %></td>
         <%- end -%>
       </tr>
       <%- end %>
