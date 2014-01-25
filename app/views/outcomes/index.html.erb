@@ -22,7 +22,12 @@
         <td><%= current_user.quantity(outcome) %></td>
         <td><%= '%.2f' % current_user.valuation(outcome) %></td>
         <td><%= link_to("Buy",  purchase_outcome_path(outcome, quantity: 1),   method: :post) %></td>
-        <td><%= link_to("Sell", purchase_outcome_path(outcome, quantity: -1),  method: :post) if current_user.quantity(outcome) > 0 %></td>
+        <td><%- if current_user.quantity(outcome) > 0 %>
+            <%= link_to("Sell", purchase_outcome_path(outcome, quantity: -1),  method: :post) =%>
+            <%- else %>
+            Sell
+            <%- end %>
+        </td>
         <%- end -%>
       </tr>
       <%- end %>
