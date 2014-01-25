@@ -9,6 +9,7 @@
         <%- if current_user %>
         <th>Held</th>
         <th>Valuation</th>
+        <th colspan="2">Actions</th>
         <%- end -%>
       </tr>
     </thead>
@@ -21,11 +22,11 @@
         <%- if current_user %>
         <td><%= current_user.quantity(outcome) %></td>
         <td><%= '%.2f' % current_user.valuation(outcome) %></td>
-        <td><%= link_to("Buy",  purchase_outcome_path(outcome, quantity: 1),   method: :post) %></td>
+        <td><%= link_to("Buy",  purchase_outcome_path(outcome, quantity: 1),   method: :post, class: 'btn btn-primary') %></td>
         <td><%- if current_user.quantity(outcome) > 0 %>
-            <%= link_to("Sell", purchase_outcome_path(outcome, quantity: -1),  method: :post) =%>
+            <%= link_to("Sell", purchase_outcome_path(outcome, quantity: -1),  method: :post, class: 'btn btn-primary') =%>
             <%- else %>
-            Sell
+            <button class="btn btn-primary disabled">Sell</button>
             <%- end %>
         </td>
         <%- end -%>
