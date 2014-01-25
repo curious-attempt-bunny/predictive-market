@@ -36,6 +36,7 @@
             <li class="active"><%= link_to 'Home', root_path %></li>
             <li><a href="#about">About</a></li>
             <li><a href="#balance">Balance: <%= current_user ? '%.2f' % current_user.balance : 'N/A' %></a></li>
+            <li><a href="#new_worth">Net worth: <%= current_user ? '%.2f' % current_user.net_worth : 'N/A' %></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? -%>

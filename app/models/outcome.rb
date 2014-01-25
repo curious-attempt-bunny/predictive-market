@@ -25,6 +25,10 @@ class Outcome < ActiveRecord::Base
     holdings.sum(:quantity)
   end
 
+  def opposing
+    event.outcomes.reject { |opposing| opposing == self }
+  end
+
   private
 
   def cost_function(deltas = {})
