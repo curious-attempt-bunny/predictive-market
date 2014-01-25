@@ -40,6 +40,8 @@ group :development, :test do
   gem 'pry'
 end
 
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
