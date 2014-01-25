@@ -3,7 +3,7 @@ class Outcome < ActiveRecord::Base
   # The higher this number, the higher the "inertia" of the initial share
   # price, and the more money the market might give away on a given event.
   #
-  ARTIFICIAL_LIQUIDITY = 100.0
+  ARTIFICIAL_LIQUIDITY = 20.0
 
   belongs_to :event
   has_many :holdings
