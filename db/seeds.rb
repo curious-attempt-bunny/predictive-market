@@ -8,6 +8,7 @@
 
 user    = User.find_by email:'foo@bar.com'
 user    = User.create! email:'foo@bar.com', password:'12345678' unless user
+user.update_attributes(admin: true)
 event   = Event.find_or_create_by! name: "White Christmas"
 snow    = event.outcomes.find_or_create_by! event: event, name: 'Snow at Christmas'
 no_snow = event.outcomes.find_or_create_by! event: event, name: 'No snow at Christmas'
