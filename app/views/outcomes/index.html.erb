@@ -34,4 +34,7 @@
       <%- end %>
     </tbody>
   </table>
+  <%- if current_user.try(:admin?) %>
+  <%= link_to "Create", new_event_path, class: 'btn btn-success' %>
+  <%- end %>
 </div>
