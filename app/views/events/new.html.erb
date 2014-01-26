@@ -1,16 +1,26 @@
 <h1> New Event </h1>
 
-<%= form_for @event do |f| %>
+<%= form_for @event, role: 'form' do |f| %>
 
-  <p>
+  <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
 
-  <p>
+  <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_area :description %>
-  </p>
+    <%= f.text_area :description, class: 'form-control' %>
+  </div>
+
+  <% 5.times do |i| %>
+
+    <div class="form-group">
+      <%= f.label :name, "Outcome #{i + 1}" %>
+      <%= f.text_field :name, name: 'event[outcomes_attributes][][name]', class: 'form-control' %>
+      <%= f.hidden_field :id, name: 'event[outcomes_attributes][][event_id]', class: 'form-control' %>
+    </div>
+
+  <% end %>
 
   <%= f.submit "Create" %>
 <% end %>

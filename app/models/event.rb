@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
 
   has_many :outcomes
 
-  accepts_nested_attributes_for :outcomes
+  accepts_nested_attributes_for :outcomes, reject_if: proc { |attr| attr['name'].blank? }
 
   def outcome_terms(deltas = {})
     outcomes.collect do |outcome|
