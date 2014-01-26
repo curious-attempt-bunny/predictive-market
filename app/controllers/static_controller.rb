@@ -3,5 +3,6 @@ class StaticController < ApplicationController
     if current_user
       redirect_to outcomes_path
     end
+    @events = Event.all
   end
 end

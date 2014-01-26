@@ -11,4 +11,8 @@ class Event < ActiveRecord::Base
       Math::E ** ( outstanding / Outcome::ARTIFICIAL_LIQUIDITY )
     end
   end
+
+  def majority_outcome
+    outcomes.max { |outcome| outcome.shares_outstanding }
+  end
 end
