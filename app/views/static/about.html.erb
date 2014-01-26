@@ -4,10 +4,12 @@
     <div class="lead">
       Prophetron is a speculative market created for the purpose of evaluating predictions among friends. The current price of an event is a prediction of the probability of an event.
     </div>
+    <%- unless current_user %>
     <div class="actions text-center">
       <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary btn-lg" %>
       <%= link_to "Sign In", new_user_session_path, class: "btn btn-primary btn-lg" %>
     </div>
+    <%- end %>
   </div>
   <div class="col-md-4">
     <h3>Current Trending Predictions</h3>
@@ -18,7 +20,11 @@
       <%- end %>
     </ul>
     <div class="text-center">
+      <%- if current_user %>
+      <%= link_to "Think we're wrong?", outcomes_path %>
+      <%- else %>
       <%= link_to "Think we're wrong?", new_user_registration_path %>
+      <%- end %>
     </div>
   </div>
 </div>

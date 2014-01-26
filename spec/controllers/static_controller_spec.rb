@@ -6,7 +6,7 @@ describe StaticController do
     it "returns http success" do
       @controller.stub(:current_user).and_return(nil)
       get 'home'
-      response.should be_success
+      response.should be_redirect
     end
   end
 
