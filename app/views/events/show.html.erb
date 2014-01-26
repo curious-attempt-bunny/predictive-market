@@ -1,11 +1,12 @@
-<p> Name: <%= @event.name %> </p>
+<h1> <%= @event.name %> </h1>
 
-<p> Outcomes:
-  <ul>
-    <% @event.outcomes.each do |outcome| %>
-      <li> <%= outcome.name %> </li>
-      <li> <%= outcome.share_price %> </li>
-    <% end %>
-  </ul>
-</p>
+<p> <%= @event.description %> </p>
+
+<h3> Possible Outcomes </h3>
+
+<ul class="list-unstyled">
+  <% @event.outcomes.each do |outcome| %>
+    <li> <%= outcome.name %> (<%= outcome.share_price.to_i %>%) </li>
+  <% end %>
+</ul>
 

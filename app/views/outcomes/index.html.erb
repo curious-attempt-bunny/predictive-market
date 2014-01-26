@@ -16,7 +16,7 @@
     <tbody>
       <%- @outcomes.each do |outcome| %>
       <tr>
-        <td><%= outcome.event.name %></td>
+        <td><%= link_to outcome.event.name, outcome.event %></td>
         <td><%= outcome.name %></td>
         <td><%= currency(outcome.share_price) %></td>
         <%- if current_user %>
