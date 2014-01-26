@@ -1,0 +1,10 @@
+<p> Name: <%= @event.name %> </p>
+
+<p> Outcomes:
+  <ul>
+    <% @event.outcomes.each do |outcome| %>
+      <li> <%= outcome.name %> </li>
+    <% end %>
+  </ul>
+</p>
+
