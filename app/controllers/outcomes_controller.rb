@@ -1,6 +1,6 @@
 class OutcomesController < ApplicationController
   def index
-    @outcomes = Outcome.all
+    @events = Event.all
     render
   end
 

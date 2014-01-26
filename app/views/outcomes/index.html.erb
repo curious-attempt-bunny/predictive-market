@@ -14,23 +14,25 @@
       </tr>
     </thead>
     <tbody>
-      <%- @outcomes.each do |outcome| %>
-      <tr>
-        <td><%= link_to outcome.event.name, outcome.event %></td>
-        <td><%= outcome.name %></td>
-        <td><%= currency(outcome.share_price) %></td>
-        <%- if current_user %>
-        <td><%= current_user.quantity(outcome) %></td>
-        <td><%= currency(current_user.valuation(outcome)) %></td>
-        <td><%= link_to("Buy",  purchase_outcome_path(outcome, quantity: 1),   method: :post, class: 'btn btn-primary') %></td>
-        <td><%- if current_user.quantity(outcome) > 0 %>
-            <%= link_to("Sell", purchase_outcome_path(outcome, quantity: -1),  method: :post, class: 'btn btn-primary') =%>
-            <%- else %>
-            <button class="btn btn-primary disabled">Sell</button>
-            <%- end %>
-        </td>
-        <%- end -%>
-      </tr>
+      <%- @events.each do |event| %>
+        <%- event.outcomes.each.with_index do |outcome, i| %>
+        <tr>
+          <td><%= link_to(outcome.event.name, outcome.event) if i == 0 %></td>
+          <td><%= outcome.name %></td>
+          <td><%= currency(outcome.share_price) %></td>
+          <%- if current_user %>
+          <td><%= current_user.quantity(outcome) %></td>
+          <td><%= currency(current_user.valuation(outcome)) %></td>
+          <td><%= link_to("Buy",  purchase_outcome_path(outcome, quantity: 1),   method: :post, class: 'btn btn-primary') %></td>
+          <td><%- if current_user.quantity(outcome) > 0 %>
+              <%= link_to("Sell", purchase_outcome_path(outcome, quantity: -1),  method: :post, class: 'btn btn-primary') =%>
+              <%- else %>
+              <button class="btn btn-primary disabled">Sell</button>
+              <%- end %>
+          </td>
+          <%- end -%>
+        </tr>
+        <%- end %>
       <%- end %>
     </tbody>
   </table>
