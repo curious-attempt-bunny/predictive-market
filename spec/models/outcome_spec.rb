@@ -14,13 +14,13 @@ describe Outcome do
 
   describe '#share_price' do
     it 'returns the instantaneous price for a share of this outcome' do
-      outcome1.share_price.should eq 0.5
+      outcome1.share_price.should eq 50
     end
   end
 
   describe '#transaction_cost' do
     it 'returns the cost to purchase a given number of shares' do
-      outcome1.transaction_cost(10).round(2).should eq 5.12
+      outcome1.transaction_cost(10).round(0).should eq 562
     end
 
     context 'after some transactions' do
@@ -31,7 +31,7 @@ describe Outcome do
       end
 
       it 'still returns the correct cost' do
-        outcome1.transaction_cost(-10).round(2).should eq -5.87
+        outcome1.transaction_cost(-10).round(0).should eq -851
       end
     end
   end
