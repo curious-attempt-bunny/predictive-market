@@ -14,7 +14,12 @@ PredictiveMarket::Application.routes.draw do
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
-  resources :events
+  resources :events do
+    member do
+      post 'resolve'
+    end
+  end
+
   resources :outcomes do
     member do
       post 'purchase'

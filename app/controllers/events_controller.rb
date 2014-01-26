@@ -1,18 +1,24 @@
 class EventsController < ApplicationController
-  def new
-    @event = Event.new
-  end
-
-  def edit
-    @event = Event.find(params[:id])
-  end
 
   def show
     @event = Event.find(params[:id])
   end
 
+  def resolve
+    event = Event.find params[:id]
+    outcome = Outcome.find params[:outcome_id]
+
+    event.resolve outcome
+    redirect_to outcomes_url
+  end
+
+  def new
+    @event = Event.new
+  end
+
   def create
-    @event = Event.new(event_params)
+    params = params.require(:event).permit(:name, :description, outcomes_attributes: [:name])
+    @event = Event.new(parama)
 
     respond_to do |format|
       if @event.save
@@ -23,25 +29,6 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def update
-    @event = Event.find(params[:id])
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to outcomes_url, notice: 'Event was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  private
-
-  def event_params
-    params.require(:event).permit(:name, :description, outcomes_attributes: [:name])
   end
 
 end
