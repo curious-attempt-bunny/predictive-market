@@ -12,9 +12,10 @@
   <div class="col-md-4">
     <h3>Current Trending Predictions</h3>
     <ul>
-      <li>13% – Will this open source project be used at least 100 people</li>
-      <li>1% – Will we become millionaires in the next 10 years?</li>
-      <li>82% – Will this code be replaced with something more reasonable?</li>
+      <%- @events.each do |event| %>
+      <%- majority_outcome = event.majority_outcome %>
+      <li><%= majority_outcome.share_price.to_i %>% - <%= majority_outcome.name %></li>
+      <%- end %>
     </ul>
     <div class="text-center">
       <%= link_to "Think we're wrong?", new_user_registration_path %>
