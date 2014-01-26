@@ -6,13 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-user    = User.create!(email:'foo@bar.com', password:'12345678')
-event   = Event.create!(name: "White Christmas")
-snow    = Outcome.create!(event: event, name: 'Snow at Christmas')
-no_snow = Outcome.create!(event: event, name: 'No snow at Christmas')
-Holding.create!(user: user, outcome: snow, quantity: 10)
+user    = User.find_by email:'foo@bar.com'
+user    = User.create! email:'foo@bar.com', password:'12345678' unless user
+event   = Event.find_or_create_by! name: "White Christmas"
+snow    = event.outcomes.find_or_create_by! event: event, name: 'Snow at Christmas'
+no_snow = event.outcomes.find_or_create_by! event: event, name: 'No snow at Christmas'
+user.purchase(snow, 10) if user.quantity(snow) == 0
 
-event   = Event.create! name: "Sunrise tomorrow"
-shine   = event.outcomes.create name: "The sun comes up and shines brightly."
-cloudy  = event.outcomes.create name: "The sun comes up but is obscured by clouds."
-doom    = event.outcomes.create name: "The sun does not come up."
+event   = Event.find_or_create_by! name: "Sunrise tomorrow"
+shine   = event.outcomes.find_or_create_by! name: "The sun comes up and shines brightly."
+cloudy  = event.outcomes.find_or_create_by! name: "The sun comes up but is obscured by clouds."
+doom    = event.outcomes.find_or_create_by! name: "The sun does not come up."
