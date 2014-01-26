@@ -30,14 +30,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Prophetron</a>
+          <a class="navbar-brand">Prophetron</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><%= link_to 'Home', root_path %></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="#balance">Balance: <%= current_user ? currency(current_user.balance) : 'N/A' %></a></li>
-            <li><a href="#new_worth">Net worth: <%= current_user ? currency(current_user.net_worth) : 'N/A' %></a></li>
+            <li class="<%= 'active' if controller_name == 'outcomes'%>">
+              <%= link_to 'Home', root_path %>
+            </li>
+            <li class="<%= 'active' if action_name == 'about'%>">
+              <%= link_to 'About', about_path %>
+            </li>
+            <li><a>Balance: <%= current_user ? currency(current_user.balance) : 'N/A' %></a></li>
+            <li><a>Net worth: <%= current_user ? currency(current_user.net_worth) : 'N/A' %></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? -%>
