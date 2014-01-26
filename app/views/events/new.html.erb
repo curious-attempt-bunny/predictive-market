@@ -16,7 +16,7 @@
 
     <div class="form-group">
       <%= f.label :name, "Outcome #{i + 1}" %>
-      <%= f.text_field :name, name: 'event[outcomes_attributes][][name]', class: 'form-control' %>
+      <%= f.text_field :name, name: 'event[outcomes_attributes][][name]', class: 'form-control', placeholder: 'Fill in as many outcomes as needed' %>
       <%= f.hidden_field :id, name: 'event[outcomes_attributes][][event_id]', class: 'form-control' %>
     </div>
 
