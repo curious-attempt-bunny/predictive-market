@@ -19,19 +19,20 @@ class User < ActiveRecord::Base
     save!
 
     purchases.create!(outcome: outcome, quantity: quantity, cost: cost)
-    
+
     holding = holdings.where(outcome: outcome).first || holdings.build(outcome: outcome, quantity: 0)
     holding.quantity += quantity
     holding.save!
   end
 
-  def quantity(outcome)
-    holdings.where(outcome: outcome).sum(:quantity)
+  # Returns this user's Holding object for a given outcome.
+  #
+  def holdings_of(outcome)
+    holdings.where(outcome: outcome).first || NullHolding.new(self, outcome)
   end
 
-  def valuation(outcome)
-    return 0 if quantity(outcome) == 0
-    -outcome.transaction_cost(-quantity(outcome))
+  def owns_shares_of?(outcome)
+    holdings_of(outcome).quantity > 0
   end
 
   def net_worth
