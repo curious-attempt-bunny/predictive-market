@@ -21,16 +21,7 @@ class User < ActiveRecord::Base
     holding.save!
   end
 
-  def quantity(outcome)
-    holdings.where(outcome: outcome).sum(:quantity)
-  end
-
-  def valuation(outcome)
-    return 0 if quantity(outcome) == 0
-    -outcome.transaction_cost(-quantity(outcome))
-  end
-
   def net_worth
-    balance + holdings.map { |holding| valuation(holding.outcome) }.inject(0, :+)
+    balance + holdings.map { |holding| holding.valuation }.inject(:+)
   end
 end
