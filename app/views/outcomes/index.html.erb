@@ -24,16 +24,16 @@
             <%- if current_user %>
               <td><%= current_user.quantity(outcome) %></td>
               <td><%= currency(current_user.valuation(outcome)) %></td>
-              <td><%= link_to("Buy",  purchase_outcome_path(outcome, quantity: 1),      method: :post, class: 'btn btn-primary') %></td>
+              <td><%= link_to("Buy",  purchase_outcome_path(outcome, quantity: 1),          method: :post, class: 'btn btn-primary') %></td>
               <td>
                 <%- if current_user.quantity(outcome) > 0 %>
-                  <%= link_to("Sell", purchase_outcome_path(outcome, quantity: -1),     method: :post, class: 'btn btn-primary') =%>
+                  <%= link_to("Sell", purchase_outcome_path(outcome, quantity: -1),         method: :post, class: 'btn btn-primary') =%>
                 <%- else %>
                   <button class="btn btn-primary disabled">Sell</button>
                 <%- end %>
               </td>
               <%- if current_user.admin? %>
-                <td><%= link_to("Resolve", resolve_event_path(event, outcome: outcome), method: :post, class: 'btn btn-warning') %></td>
+                <td><%= link_to("Resolve", resolve_event_path(event, outcome_id: outcome),  method: :post, class: 'btn btn-warning') %></td>
               <%- end %>
             <%- end -%>
           </tr>

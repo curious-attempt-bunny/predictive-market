@@ -1,6 +1,6 @@
 class OutcomesController < ApplicationController
   def index
-    @events = Event.all
+    @events = Event.unresolved
     render
   end
 

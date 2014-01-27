@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140126034341) do
+ActiveRecord::Schema.define(version: 20140126232054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20140126034341) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
+    t.boolean  "resolved",    default: false
   end
 
   create_table "holdings", force: true do |t|
@@ -38,6 +39,8 @@ ActiveRecord::Schema.define(version: 20140126034341) do
     t.integer  "shares_outstanding"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "resolved",           default: false
+    t.boolean  "correct"
   end
 
   add_index "outcomes", ["event_id"], name: "index_outcomes_on_event_id", using: :btree

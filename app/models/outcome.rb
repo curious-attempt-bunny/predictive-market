@@ -30,6 +30,23 @@ class Outcome < ActiveRecord::Base
     event.outcomes.reject { |opposing| opposing == self }
   end
 
+  # Mark this outcome resolved as either correct or incorrect and cash out any
+  # holdings appropriately.  This should only happen when an event is being
+  # resolved.
+  #
+  def resolve(correct)
+    self.resolved = true
+    self.correct = correct
+
+    if correct
+      # Each correct holding is worth 100 lightbulbs (it is now 100% likely to be correct)
+      holdings.each { |h| h.user.increment! 'balance', (h.quantity * 100) }
+    end
+    holdings.each { |h| h.delete }  # TODO: Should we save these for data mining?
+
+    save
+  end
+
   private
 
   def cost_function(deltas = {})

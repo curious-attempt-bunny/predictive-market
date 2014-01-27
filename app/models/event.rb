@@ -1,8 +1,20 @@
 class Event < ActiveRecord::Base
 
   has_many :outcomes
+  has_many :holdings, through: :outcomes
+
+  scope :unresolved, -> { where.not(resolved: true) }
 
   accepts_nested_attributes_for :outcomes, reject_if: proc { |attr| attr['name'].blank? }
+
+  def resolve(correct_outcome)
+    raise "'#{correct_outcome.name}' is not a valid outcome for '#{name}'" unless outcomes.include? correct_outcome
+
+    self.resolved = true
+    outcomes.each { |outcome| outcome.resolve(outcome == correct_outcome) }
+
+    save
+  end
 
   def outcome_terms(deltas = {})
     outcomes.collect do |outcome|
