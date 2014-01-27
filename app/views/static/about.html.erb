@@ -14,7 +14,7 @@
   <div class="col-md-4">
     <h3>Current Trending Predictions</h3>
     <ul>
-      <%- @events.each do |event| %>
+      <%- @events.unresolved.each do |event| %>
         <%- plurality_outcome = event.plurality_outcome %>
         <li><%= plurality_outcome.share_price.to_i %>% - <%= plurality_outcome.name %></li>
       <%- end %>
