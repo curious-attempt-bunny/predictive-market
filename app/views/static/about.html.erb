@@ -15,15 +15,15 @@
     <h3>Current Trending Predictions</h3>
     <ul>
       <%- @events.each do |event| %>
-      <%- majority_outcome = event.majority_outcome %>
-      <li><%= majority_outcome.share_price.to_i %>% - <%= majority_outcome.name %></li>
+        <%- plurality_outcome = event.plurality_outcome %>
+        <li><%= plurality_outcome.share_price.to_i %>% - <%= plurality_outcome.name %></li>
       <%- end %>
     </ul>
     <div class="text-center">
       <%- if current_user %>
-      <%= link_to "Think we're wrong?", outcomes_path %>
+        <%= link_to "Think we're wrong?", outcomes_path %>
       <%- else %>
-      <%= link_to "Think we're wrong?", new_user_registration_path %>
+        <%= link_to "Think we're wrong?", new_user_registration_path %>
       <%- end %>
     </div>
   </div>

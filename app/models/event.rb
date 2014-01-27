@@ -24,7 +24,7 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def majority_outcome
+  def plurality_outcome
     outcomes.max { |outcome| outcome.shares_outstanding }
   end
 end
