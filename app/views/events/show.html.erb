@@ -10,3 +10,27 @@
   <% end %>
 </ul>
 
+<h3>Purchase History</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Outcome</th>
+      <th>User</th>
+      <th>Quantity</th>
+      <th>Cost</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @event.purchases.order('created_at desc').each_with_index do |purchase,i| %>
+      <tr class="<%= 'striped' if i.even? %>">
+        <td><%= purchase.created_at %></td>
+        <td><%= purchase.outcome.name %></td>
+        <td><%= purchase.user.email %></td>
+        <td><%= purchase.quantity %></td>
+        <td><%= currency(purchase.cost) %></td>
+      </tr>  
+    <%- end %>
+  </tbody>
+</table>

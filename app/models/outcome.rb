@@ -7,6 +7,7 @@ class Outcome < ActiveRecord::Base
 
   belongs_to :event
   has_many :holdings
+  has_many :purchases
 
   before_create { |outcome| outcome.shares_outstanding = 0 }
 

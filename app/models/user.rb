@@ -7,15 +7,19 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :holdings
+  has_many :purchases
 
   def purchase(outcome, quantity)
     return if quantity == 0
 
-    new_balance = balance - outcome.transaction_cost(quantity)
+    cost = outcome.transaction_cost(quantity)
+    new_balance = balance - cost
     raise InsufficientBalanceError if new_balance < 0
     self.balance = new_balance
     save!
 
+    purchases.create!(outcome: outcome, quantity: quantity, cost: cost)
+    
     holding = holdings.where(outcome: outcome).first || holdings.build(outcome: outcome, quantity: 0)
     holding.quantity += quantity
     holding.save!

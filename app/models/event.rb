@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
 
   has_many :outcomes
   has_many :holdings, through: :outcomes
+  has_many :purchases, through: :outcomes
 
   scope :unresolved, -> { where.not(resolved: true) }
 
