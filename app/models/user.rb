@@ -35,6 +35,6 @@ class User < ActiveRecord::Base
   end
 
   def net_worth
-    balance + holdings.map { |holding| holding.valuation }.inject(:+)
+    balance + holdings.map { |holding| holding.valuation }.inject(0, :+)
   end
 end

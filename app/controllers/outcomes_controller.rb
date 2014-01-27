@@ -1,7 +1,6 @@
 class OutcomesController < ApplicationController
   def index
     @events = Event.unresolved
-    render
   end
 
   def purchase
