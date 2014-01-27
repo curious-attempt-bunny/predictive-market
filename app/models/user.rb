@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :holdings
 
-  def purchase(outcome, quantity, options = {})
+  def purchase(outcome, quantity)
     return if quantity == 0
 
     new_balance = balance - outcome.transaction_cost(quantity)
